@@ -1,5 +1,4 @@
 <?php
-// Database connection
 $host = 'localhost';
 $dbname = 'your_database_name';
 $username = 'your_username';
@@ -12,12 +11,10 @@ try {
     die("Could not connect to the database $dbname :" . $e->getMessage());
 }
 
-// Handling form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = $_POST['title'];
     $content = $_POST['content'];
 
-    // Insert news into database
     $stmt = $pdo->prepare("INSERT INTO news (title, content) VALUES (:title, :content)");
     $stmt->bindParam(':title', $title);
     $stmt->bindParam(':content', $content);

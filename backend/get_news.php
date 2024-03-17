@@ -1,5 +1,4 @@
 <?php
-// Database connection
 $host = 'localhost';
 $dbname = 'your_database_name';
 $username = 'your_username';
@@ -12,11 +11,9 @@ try {
     die("Could not connect to the database $dbname :" . $e->getMessage());
 }
 
-// Retrieve news from database
 $stmt = $pdo->query("SELECT * FROM news ORDER BY id DESC");
 $newsList = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// Display news
 foreach ($newsList as $news) {
     echo '<div class="card mt-3">';
     echo '<div class="card-body">';
