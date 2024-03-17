@@ -1,17 +1,20 @@
 <?php
-$host = 'localhost';
-$dbname = 'your_database_name';
-$username = 'your_username';
-$password = 'your_password';
+$servername = "localhost";
+$username = "root";
+$password = ""; 
+$database = "todo"; 
 
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Could not connect to the database $dbname :" . $e->getMessage());
+
+$conn = new mysqli($servername, $username, $password, $database);
+
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
 
-$stmt = $pdo->query("SELECT * FROM news ORDER BY id DESC");
+
+
+$stmt = $conn->query("SELECT * FROM news ORDER BY id DESC");
 $newsList = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 foreach ($newsList as $news) {
